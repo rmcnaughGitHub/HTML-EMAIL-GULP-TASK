@@ -1,4 +1,6 @@
-# GULP-TASK-CONTROL
+# GULP-HTML-EMAIL-TASK-CONTROL
+<br>Takes Html, sass and minifies both and set styles inline. Also minifies images.
+<br>
 <br>https://css-tricks.com/gulp-for-beginners/
 <br>//Browsersych -https://www.browsersync.io/docs/gulp/
 <br><br>//How to use Gulp to generate CSS from Sass/scss -- http://www.codingpedia.org/ama/how-to-use-gulp-to-generate-css-from-sass-scss/
