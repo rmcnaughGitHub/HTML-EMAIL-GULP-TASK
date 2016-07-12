@@ -6,11 +6,12 @@ var gulp = require('gulp'),
 	browserSync = require('browser-sync').create(),
 	imagemin = require('gulp-imagemin'),//https://www.npmjs.com/package/gulp-imagemin
 	pngquant = require('imagemin-pngquant'),//pngquant enabled saves extra bytes on PNG files
-	cache = require('gulp-cache'),
+	//cache = require('gulp-cache'),
+	minifycss = require('gulp-minify-css'),//https://www.npmjs.org/package/gulp-minify-css
 	del = require('del'),
 	runSequence = require('run-sequence'),
 	concat = require('gulp-concat'),//cocatenate files
-	inline = require('gulp-mc-inline-css'),//makes css inline
+	inlineCss = require('gulp-inline-css'),//makes css inline
 	/* The gulp task system provides a gulp task 
 	with a callback, which can signal successful
 	task completion (being called with no arguments),
@@ -73,10 +74,13 @@ gulp.task('sass-build', function() {
 		.pipe(gulp.dest(paths.styles.dist));//dist folder
 });
 
-gulp.task('css-inline', function(){
-	gulp.src(paths.styles.main)
-		.pipe(inline(APIKEY))
-		.pipe(gulp.dest(paths.html.src))
+gulp.task('inlineCss', function(){
+	gulp.src(paths.html.src)//html file
+		.pipe(inlineCss({
+			applyStyleTags: true,
+	        applyLinkTags: true,
+		}))
+		.pipe(gulp.dest(paths.html.dist))
 });
 
 //BROWSER SYNC - LIVE RE-LOAD
@@ -94,13 +98,13 @@ gulp.task('browser-sync', function() {
 //IMAGE-MINIFY
 gulp.task('imageMin', function () {
     gulp.src(paths.images.src)
-        .pipe( cache(imagemin({
+        .pipe( imagemin({
         	optimizationLevel: 6, 
         	progressive: true,
         	use: [pngquant()], 
         	interlaced: true
-        })) )
-  		.pipe(gulp.dest(paths.images.dist));
+        })) 
+        .pipe(gulp.dest(paths.images.dist));
 });
 
 
@@ -128,5 +132,5 @@ gulp.task('default', function() {
 
 //BUILD TASK
 gulp.task('build', function(){
-	runSequence('clean:dist',['sass-build','copy-html','imageMin']);
+	runSequence('clean:dist',['sass-build','inlineCss','copy-html','imageMin']);
 });
