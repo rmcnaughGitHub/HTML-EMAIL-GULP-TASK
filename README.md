@@ -15,7 +15,7 @@ https://github.com/gulpjs/gulp/blob/master/docs/getting-started.md
 
 
 
-<br>Main Modles Used: -  npm install --save-dev gulp-util  gulp-sass  gulp-minify-css gulp-rename  gulp-autoprefixer gulp-util gulp-minify-css gulp-rename del gulp-uglify gulp-concat jshint gulp-jshint gulp-wrapper gulp-sourcemaps jshint-stylish gulp-plumber gulp-cache gulp-imagemin imagemin-pngquant run-sequence gulp-inline-css
+<br>Main Modles Used: -  npm install --save-dev gulp-util  gulp-sass gulp-rename  gulp-autoprefixer gulp-util gulp-minify-css gulp-rename del gulp-uglify gulp-concat jshint gulp-wrapper gulp-sourcemaps gulp-plumber gulp-cache gulp-imagemin imagemin-pngquant run-sequence gulp-inline-css gulp-htmlmin
 <br>
 <br>Sass: - npm install gulp-sass --save-dev 
 <br>Uglify: - npm install --save-dev gulp-uglify
@@ -30,6 +30,7 @@ https://github.com/gulpjs/gulp/blob/master/docs/getting-started.md
 <br>Run Sequence: npm install run-sequence --save-dev
 <br>Takes an html file and inlines the CSS properties into the style attribute: npm install --save-dev gulp-mc-inline-css
 <br>Minify: npm install --save-dev gulp-minify
+<br>Html minifyer - https://github.com/kangax/html-minifier: npm i gulp-htmlmin --save-dev
 <br>
 <br> 'gulp' to run server and watch
 <br> 'gulp build' to build files in 'dist' folder

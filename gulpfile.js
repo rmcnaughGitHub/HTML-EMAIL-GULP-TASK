@@ -5,8 +5,8 @@ var gulp = require('gulp'),
 	sass = require('gulp-sass'),//sass compiler
 	browserSync = require('browser-sync').create(),
 	imagemin = require('gulp-imagemin'),//https://www.npmjs.com/package/gulp-imagemin
+	htmlmin = require('gulp-htmlmin'),//html minify
 	pngquant = require('imagemin-pngquant'),//pngquant enabled saves extra bytes on PNG files
-	//cache = require('gulp-cache'),
 	minifycss = require('gulp-minify-css'),//https://www.npmjs.org/package/gulp-minify-css
 	del = require('del'),
 	runSequence = require('run-sequence'),
@@ -83,6 +83,21 @@ gulp.task('inlineCss', function(){
 		.pipe(gulp.dest(paths.html.dist))
 });
 
+
+//HTML MINIFY
+gulp.task('htmlmin', function(){
+	gulp.src(paths.html.src)
+	.pipe(htmlmin({
+		collapseWhitespace: true,
+		collapseInlineTagWhitespace: true,
+		conservativeCollapse: true,
+		ignoreCustomComments: true,
+		removeComments: true
+	}))
+	.pipe(gulp.dest(paths.html.dist));
+});
+
+
 //BROWSER SYNC - LIVE RE-LOAD
 // ***can use 'serve' where 'browser-sync' is used***
 gulp.task('browser-sync', function() {  
@@ -132,5 +147,5 @@ gulp.task('default', function() {
 
 //BUILD TASK
 gulp.task('build', function(){
-	runSequence('clean:dist',['sass-build','inlineCss','copy-html','imageMin']);
+	runSequence('clean:dist',[/*'sass-build',*/'inlineCss', 'htmlmin', 'copy-html', 'imageMin']);
 });
